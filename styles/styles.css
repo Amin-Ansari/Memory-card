@@ -7,3 +7,68 @@
   text-decoration: none;
   font-family: "Poppins", sans-serif;
 }
+body {
+  background-color: #6558f1;
+  height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 512px;
+  height: 512px;
+}
+.card-list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.card-item {
+  width: calc(100% / 4);
+  height: calc(100% / 4);
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+.item-content {
+  background-color: white;
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  box-shadow: 0px 1px 3px 0px rgba(46, 45, 45, 0.295);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 5px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: all 0.3s linear;
+}
+.item-content img {
+  max-width: 90%;
+  height: auto;
+  top: 0px;
+  left: 0px;
+}
+.back-view {
+  transform: rotateY(-180deg);
+}
+
+.fa-question {
+  color: #6558f1;
+  font-size: 2.5rem;
+}
+.card-item:hover .back-view {
+  transform: rotateY(0deg);
+}
+.card-item:hover .question-view {
+  transform: rotateY(-180deg);
+}

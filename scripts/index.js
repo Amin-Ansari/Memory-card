@@ -1,6 +1,8 @@
 import "../styles/styles.css";
 import { renderEachItem } from "./functions";
 import { placeTheImages } from "./functions";
+import { remainNumber } from "./elements";
+import { remainButton } from "./elements";
 
 let clickedCards = {
   firstCard: undefined,
@@ -20,8 +22,49 @@ let clickedCards = {
   },
 };
 
+let revelation = {
+  remaintime: 3,
+  seconds: 5,
+  takeALook: function () {
+    this.remaintime -= 1;
+    this.refreshRemain;
+    remainButton.innerHTML = `${revelation.seconds} Seconds`;
+    remainButton.disabled = true;
+    document
+      .querySelectorAll(".back-view, .question-view")
+      .forEach(function (item) {
+        if (!item.classList.contains("fliped")) {
+          item.lastElementChild.classList.add("temp-fliped");
+          item.firstElementChild.classList.add("temp-fliped");
+        }
+      });
+    let timer = setInterval(function () {
+      revelation.seconds -= 1;
+      remainButton.innerHTML = `${revelation.seconds} Seconds`;
+      if (revelation.seconds == 0) {
+        remainButton.innerHTML = `Take a look`;
+        remainButton.disabled = false;
+        clearInterval(timer);
+        revelation.seconds = 5;
+        document
+          .querySelectorAll(".back-view, .question-view")
+          .forEach(function (item) {
+            if (!item.classList.contains("temp-fliped")) {
+              item.firstElementChild.classList.remove("temp-fliped");
+              item.lastElementChild.classList.remove("temp-fliped");
+            }
+          });
+      }
+    }, 1000);
+  },
+  refreshRemain: function () {
+    remainNumber.innerHTML = revelation.remaintime;
+  },
+};
+
 renderEachItem();
 placeTheImages();
+revelation.refreshRemain();
 
 document.querySelectorAll("li").forEach(function (item) {
   item.addEventListener("click", function () {
@@ -46,3 +89,5 @@ document.querySelectorAll("li").forEach(function (item) {
     }
   });
 });
+
+remainButton.addEventListener("click", revelation.takeALook);

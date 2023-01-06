@@ -1,17 +1,5 @@
 import { cardList } from "./elements";
 
-// const generateRandomNumber = function (alreadyGen) {
-//   let genList = alreadyGen;
-//   let randomIndex = Math.floor(Math.random() * 16) + 1;
-//   for (let number of genList) {
-//     if (Number(number) != Number(randomIndex)) {
-//     } else {
-//       randomIndex = Math.floor(Math.random() * 16) + 1;
-//     }
-//   }
-//   return randomIndex;
-// };
-
 function allIndex() {
   let generatedNumbers = [];
   for (let i = 0; i <= 15; i++) {

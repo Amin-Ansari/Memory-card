@@ -2,10 +2,11 @@ import { cardList } from "./elements";
 
 const generateRandomNumber = function (alreadyGen) {
   let genList = alreadyGen;
-  let randomIndex = Math.floor(Math.random() * 15) + 1;
-  for (let number of alreadyGen) {
-    if (number == randomIndex) {
-      randomIndex = Math.floor(Math.random(number));
+  let randomIndex = Math.floor(Math.random() * 16) + 1;
+  for (let number of genList) {
+    if (Number(number) != Number(randomIndex)) {
+    } else {
+      randomIndex = Math.floor(Math.random() * 16) + 1;
     }
   }
   return randomIndex;
@@ -16,10 +17,10 @@ export function placeTheImages() {
   const addedImages = document.querySelectorAll("img");
   for (let b = 0; b < Math.floor(addedImages.length / 2); b++) {
     for (let j = 0; j <= 1; j++) {
-      const test = generateRandomNumber(generatedNumbers);
-      console.log(test);
-      generatedNumbers.push(test);
-      addedImages[test].src = `../images/img-${b + 1}.png`;
+      generatedNumbers.push(generateRandomNumber(generatedNumbers));
+      addedImages[generatedNumbers.length - 1].src = `../images/img-${
+        b + 1
+      }.png`;
     }
   }
 }

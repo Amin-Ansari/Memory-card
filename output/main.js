@@ -526,27 +526,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./elements */ "./scripts/elements.js");
 
 
-const generateRandomNumber = function (alreadyGen) {
-  let genList = alreadyGen;
-  let randomIndex = Math.floor(Math.random() * 16) + 1;
-  for (let number of genList) {
-    if (Number(number) != Number(randomIndex)) {
-    } else {
-      randomIndex = Math.floor(Math.random() * 16) + 1;
-    }
-  }
-  return randomIndex;
-};
+// const generateRandomNumber = function (alreadyGen) {
+//   let genList = alreadyGen;
+//   let randomIndex = Math.floor(Math.random() * 16) + 1;
+//   for (let number of genList) {
+//     if (Number(number) != Number(randomIndex)) {
+//     } else {
+//       randomIndex = Math.floor(Math.random() * 16) + 1;
+//     }
+//   }
+//   return randomIndex;
+// };
 
-function placeTheImages() {
+function allIndex() {
   let generatedNumbers = [];
+  for (let i = 0; i <= 15; i++) {
+    generatedNumbers.push(i);
+  }
+  return generatedNumbers;
+}
+function placeTheImages() {
   const addedImages = document.querySelectorAll("img");
+  const numberList = allIndex();
+  let indexList = [];
   for (let b = 0; b < Math.floor(addedImages.length / 2); b++) {
     for (let j = 0; j <= 1; j++) {
-      generatedNumbers.push(generateRandomNumber(generatedNumbers));
-      addedImages[generatedNumbers.length - 1].src = `../images/img-${
-        b + 1
-      }.png`;
+      indexList.push(
+        numberList.splice(Math.floor(Math.random() * numberList.length), 1)[0]
+      );
+      const theIndex = indexList[indexList.length - 1];
+      addedImages[theIndex].src = `../images/img-${b + 1}.png`;
     }
   }
 }
@@ -685,7 +694,6 @@ document.querySelectorAll("li").forEach(function (item) {
       clickedCards.isRightClicked();
       const shakedElements = document.querySelectorAll(".shake");
       if (shakedElements) {
-        console.log(shakedElements);
         setTimeout(function () {
           for (let item of shakedElements) {
             item.firstElementChild.classList.remove("fliped");
@@ -697,6 +705,24 @@ document.querySelectorAll("li").forEach(function (item) {
     }
   });
 });
+
+// const generateRandomNumber = function (alreadyGen) {
+//   let genList = alreadyGen;
+//   let randomIndex = Math.floor(Math.random() * 16) + 1;
+//   for (let number of genList) {
+//     if (Number(number) != Number(randomIndex)) {
+//     } else {
+//       randomIndex = Math.floor(Math.random() * 16) + 1;
+//     }
+//   }
+//   return randomIndex;
+// };
+
+// let list = [];
+// for (let i = 0; i <= 15; i++) {
+//   list.push(generateRandomNumber(list));
+//   console.log(list.sort());
+// }
 
 })();
 

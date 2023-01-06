@@ -35,7 +35,6 @@ document.querySelectorAll("li").forEach(function (item) {
       clickedCards.isRightClicked();
       const shakedElements = document.querySelectorAll(".shake");
       if (shakedElements) {
-        console.log(shakedElements);
         setTimeout(function () {
           for (let item of shakedElements) {
             item.firstElementChild.classList.remove("fliped");

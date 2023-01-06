@@ -30,14 +30,12 @@ let revelation = {
     this.refreshRemain;
     remainButton.innerHTML = `${revelation.seconds} Seconds`;
     remainButton.disabled = true;
-    document
-      .querySelectorAll(".back-view, .question-view")
-      .forEach(function (item) {
-        if (!item.classList.contains("fliped")) {
-          item.lastElementChild.classList.add("temp-fliped");
-          item.firstElementChild.classList.add("temp-fliped");
-        }
-      });
+    document.querySelectorAll(".card-item").forEach(function (item) {
+      if (!item.classList.contains("fliped")) {
+        item.lastElementChild.classList.add("temp-fliped");
+        item.firstElementChild.classList.add("temp-fliped");
+      }
+    });
     let timer = setInterval(function () {
       revelation.seconds -= 1;
       remainButton.innerHTML = `${revelation.seconds} Seconds`;
@@ -46,14 +44,12 @@ let revelation = {
         remainButton.disabled = false;
         clearInterval(timer);
         revelation.seconds = 5;
-        document
-          .querySelectorAll(".back-view, .question-view")
-          .forEach(function (item) {
-            if (!item.classList.contains("temp-fliped")) {
-              item.firstElementChild.classList.remove("temp-fliped");
-              item.lastElementChild.classList.remove("temp-fliped");
-            }
-          });
+        document.querySelectorAll(".card-item").forEach(function (item) {
+          if (!item.classList.contains("fliped")) {
+            item.firstElementChild.classList.remove("temp-fliped");
+            item.lastElementChild.classList.remove("temp-fliped");
+          }
+        });
       }
     }, 1000);
   },
@@ -90,4 +86,6 @@ document.querySelectorAll("li").forEach(function (item) {
   });
 });
 
-remainButton.addEventListener("click", revelation.takeALook);
+remainButton.addEventListener("click", function () {
+  revelation.takeALook();
+});

@@ -26,32 +26,36 @@ let revelation = {
   remaintime: 3,
   seconds: 5,
   takeALook: function () {
-    this.remaintime -= 1;
-    this.refreshRemain;
-    remainButton.innerHTML = `${revelation.seconds} Seconds`;
-    remainButton.disabled = true;
-    document.querySelectorAll(".card-item").forEach(function (item) {
-      if (!item.classList.contains("fliped")) {
-        item.lastElementChild.classList.add("temp-fliped");
-        item.firstElementChild.classList.add("temp-fliped");
-      }
-    });
-    let timer = setInterval(function () {
-      revelation.seconds -= 1;
+    if (this.remaintime >= 1) {
+      this.remaintime -= 1;
+      this.refreshRemain();
       remainButton.innerHTML = `${revelation.seconds} Seconds`;
-      if (revelation.seconds == 0) {
-        remainButton.innerHTML = `Take a look`;
-        remainButton.disabled = false;
-        clearInterval(timer);
-        revelation.seconds = 5;
-        document.querySelectorAll(".card-item").forEach(function (item) {
-          if (!item.classList.contains("fliped")) {
-            item.firstElementChild.classList.remove("temp-fliped");
-            item.lastElementChild.classList.remove("temp-fliped");
-          }
-        });
-      }
-    }, 1000);
+      remainButton.disabled = true;
+      document.querySelectorAll(".card-item").forEach(function (item) {
+        if (!item.classList.contains("fliped")) {
+          item.lastElementChild.classList.add("temp-fliped");
+          item.firstElementChild.classList.add("temp-fliped");
+        }
+      });
+      let timer = setInterval(function () {
+        revelation.seconds -= 1;
+        remainButton.innerHTML = `${revelation.seconds} Seconds`;
+        if (revelation.seconds == 0) {
+          remainButton.innerHTML = `Take a look`;
+          remainButton.disabled = false;
+          clearInterval(timer);
+          revelation.seconds = 5;
+          document.querySelectorAll(".card-item").forEach(function (item) {
+            if (!item.classList.contains("fliped")) {
+              item.firstElementChild.classList.remove("temp-fliped");
+              item.lastElementChild.classList.remove("temp-fliped");
+            }
+          });
+        }
+      }, 1000);
+    } else {
+      alert("You can't use this feature anymore!");
+    }
   },
   refreshRemain: function () {
     remainNumber.innerHTML = revelation.remaintime;

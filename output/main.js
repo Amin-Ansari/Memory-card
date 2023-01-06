@@ -678,32 +678,36 @@ let revelation = {
   remaintime: 3,
   seconds: 5,
   takeALook: function () {
-    this.remaintime -= 1;
-    this.refreshRemain;
-    _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.innerHTML = `${revelation.seconds} Seconds`;
-    _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.disabled = true;
-    document.querySelectorAll(".card-item").forEach(function (item) {
-      if (!item.classList.contains("fliped")) {
-        item.lastElementChild.classList.add("temp-fliped");
-        item.firstElementChild.classList.add("temp-fliped");
-      }
-    });
-    let timer = setInterval(function () {
-      revelation.seconds -= 1;
+    if (this.remaintime >= 1) {
+      this.remaintime -= 1;
+      this.refreshRemain();
       _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.innerHTML = `${revelation.seconds} Seconds`;
-      if (revelation.seconds == 0) {
-        _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.innerHTML = `Take a look`;
-        _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.disabled = false;
-        clearInterval(timer);
-        revelation.seconds = 5;
-        document.querySelectorAll(".card-item").forEach(function (item) {
-          if (!item.classList.contains("fliped")) {
-            item.firstElementChild.classList.remove("temp-fliped");
-            item.lastElementChild.classList.remove("temp-fliped");
-          }
-        });
-      }
-    }, 1000);
+      _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.disabled = true;
+      document.querySelectorAll(".card-item").forEach(function (item) {
+        if (!item.classList.contains("fliped")) {
+          item.lastElementChild.classList.add("temp-fliped");
+          item.firstElementChild.classList.add("temp-fliped");
+        }
+      });
+      let timer = setInterval(function () {
+        revelation.seconds -= 1;
+        _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.innerHTML = `${revelation.seconds} Seconds`;
+        if (revelation.seconds == 0) {
+          _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.innerHTML = `Take a look`;
+          _elements__WEBPACK_IMPORTED_MODULE_2__.remainButton.disabled = false;
+          clearInterval(timer);
+          revelation.seconds = 5;
+          document.querySelectorAll(".card-item").forEach(function (item) {
+            if (!item.classList.contains("fliped")) {
+              item.firstElementChild.classList.remove("temp-fliped");
+              item.lastElementChild.classList.remove("temp-fliped");
+            }
+          });
+        }
+      }, 1000);
+    } else {
+      alert("You can't use this feature anymore!");
+    }
   },
   refreshRemain: function () {
     _elements__WEBPACK_IMPORTED_MODULE_2__.remainNumber.innerHTML = revelation.remaintime;

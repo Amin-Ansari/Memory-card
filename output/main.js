@@ -652,8 +652,39 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+let clickedCards = {
+  firstCard: undefined,
+  secondCard: undefined,
+  clickedTimes: 0,
+  isRightClicked: function () {
+    if (
+      this.firstCard.lastElementChild.firstElementChild.src !=
+      this.secondCard.lastElementChild.firstElementChild.src
+    ) {
+      alert("Your choice is wrong");
+    }
+    this.clickedTimes = 0;
+    this.firstCard = undefined;
+    this.secondCard = undefined;
+  },
+};
+
 (0,_functions__WEBPACK_IMPORTED_MODULE_1__.renderEachItem)();
 (0,_functions__WEBPACK_IMPORTED_MODULE_1__.placeTheImages)();
+
+document.querySelectorAll("li").forEach(function (item) {
+  item.addEventListener("click", function () {
+    clickedCards.clickedTimes += 1;
+    console.log(item);
+    if (clickedCards.clickedTimes == 1) {
+      clickedCards.firstCard = item;
+    } else {
+      clickedCards.secondCard = item;
+      console.log(clickedCards);
+      clickedCards.isRightClicked();
+    }
+  });
+});
 
 })();
 

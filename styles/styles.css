@@ -67,9 +67,27 @@ body {
   color: #6558f1;
   font-size: 2.5rem;
 }
-.card-item:hover .back-view {
+.fliped:nth-of-type(2) {
   transform: rotateY(0deg);
 }
-.card-item:hover .question-view {
+.fliped:nth-of-type(1) {
   transform: rotateY(-180deg);
+}
+.shake {
+  animation: wrongShake 0.3s linear 0s 1 normal forwards;
+}
+
+@keyframes wrongShake {
+  25% {
+    transform: translate(10px, 10px);
+  }
+  50% {
+    transform: translate(0px, 0px);
+  }
+  75% {
+    transform: translate(10px, 10px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }

@@ -11,7 +11,8 @@ let clickedCards = {
       this.firstCard.lastElementChild.firstElementChild.src !=
       this.secondCard.lastElementChild.firstElementChild.src
     ) {
-      alert("Your choice is wrong");
+      this.firstCard.classList.add("shake");
+      this.secondCard.classList.add("shake");
     }
     this.clickedTimes = 0;
     this.firstCard = undefined;
@@ -24,14 +25,25 @@ placeTheImages();
 
 document.querySelectorAll("li").forEach(function (item) {
   item.addEventListener("click", function () {
+    item.lastElementChild.classList.add("fliped");
+    item.firstElementChild.classList.add("fliped");
     clickedCards.clickedTimes += 1;
-    console.log(item);
     if (clickedCards.clickedTimes == 1) {
       clickedCards.firstCard = item;
     } else {
       clickedCards.secondCard = item;
-      console.log(clickedCards);
       clickedCards.isRightClicked();
+      const shakedElements = document.querySelectorAll(".shake");
+      if (shakedElements) {
+        console.log(shakedElements);
+        setTimeout(function () {
+          for (let item of shakedElements) {
+            item.firstElementChild.classList.remove("fliped");
+            item.lastElementChild.classList.remove("fliped");
+            item.classList.remove("shake");
+          }
+        }, 500);
+      }
     }
   });
 });
